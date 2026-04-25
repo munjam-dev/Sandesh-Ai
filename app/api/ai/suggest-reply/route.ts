@@ -1,3 +1,4 @@
+export const runtime = 'nodejs';
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { generateAIResponse } from '@/lib/ai/openai'
@@ -93,3 +94,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'AI generation failed' }, { status: 500 })
   }
 }
+

@@ -1,3 +1,4 @@
+export const runtime = 'nodejs';
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { google } from 'googleapis'
@@ -35,3 +36,4 @@ export async function GET() {
 
   return NextResponse.redirect(url)
 }
+
