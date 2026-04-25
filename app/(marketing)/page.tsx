@@ -5,11 +5,14 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Bot, Inbox, Tags, Zap } from 'lucide-react'
 import HeroSection from '@/components/HeroSection'
 import BentoSection from '@/components/BentoSection'
+import MarqueeBanner from '@/components/MarqueeBanner'
+import Testimonials from '@/components/Testimonials'
 
 export default function HomePage() {
   return (
     <div className="overflow-hidden">
       <HeroSection />
+      <MarqueeBanner />
       {/* Problem Section */}
       <section className="py-24 px-6 border-t border-white/5 bg-[#050505]">
         <div className="max-w-4xl mx-auto text-center">
@@ -78,6 +81,8 @@ export default function HomePage() {
       </section>
 
       <BentoSection />
+
+      <Testimonials />
 
       {/* CTA Section */}
       <section className="relative py-32 px-6 overflow-hidden min-h-[600px] flex items-center justify-center">
