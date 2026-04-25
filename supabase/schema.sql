@@ -55,6 +55,7 @@ create table conversations (
   
   -- Integrations & AI
   external_thread_id text, -- Replaces gmail_thread_id
+  customer_email     text, -- Extracted for campaign targeting
   lead_status        text check (lead_status in ('HOT', 'WARM', 'COLD')),
   intent             text
 );
@@ -86,6 +87,29 @@ create table usage (
 );
 
 -- ============================================================
+-- CAMPAIGNS & LOGS
+-- ============================================================
+create table campaigns (
+  id           uuid primary key default uuid_generate_v4(),
+  user_id      uuid not null references users(id) on delete cascade,
+  name         text not null,
+  subject      text not null,
+  content      text not null,
+  audience     text not null check (audience in ('HOT', 'WARM', 'ALL')),
+  status       text not null default 'draft' check (status in ('draft', 'sent', 'scheduled')),
+  scheduled_at timestamptz,
+  created_at   timestamptz not null default now()
+);
+
+create table campaign_logs (
+  id           uuid primary key default uuid_generate_v4(),
+  campaign_id  uuid not null references campaigns(id) on delete cascade,
+  email        text not null,
+  status       text not null check (status in ('sent', 'failed')),
+  created_at   timestamptz not null default now()
+);
+
+-- ============================================================
 -- ROW LEVEL SECURITY
 -- ============================================================
 alter table users         enable row level security;
@@ -93,6 +117,8 @@ alter table integrations  enable row level security;
 alter table conversations enable row level security;
 alter table messages      enable row level security;
 alter table usage         enable row level security;
+alter table campaigns     enable row level security;
+alter table campaign_logs enable row level security;
 
 -- users
 create policy "users: read own row" on users for select using (auth.uid() = id);
@@ -123,6 +149,20 @@ create policy "messages: insert into own conversations" on messages for insert w
 create policy "usage: read own row" on usage for select using (auth.uid() = user_id);
 create policy "usage: insert own row" on usage for insert with check (auth.uid() = user_id);
 create policy "usage: update own row" on usage for update using (auth.uid() = user_id);
+
+-- campaigns
+create policy "campaigns: read own" on campaigns for select using (auth.uid() = user_id);
+create policy "campaigns: insert own" on campaigns for insert with check (auth.uid() = user_id);
+create policy "campaigns: update own" on campaigns for update using (auth.uid() = user_id);
+create policy "campaigns: delete own" on campaigns for delete using (auth.uid() = user_id);
+
+-- campaign_logs
+create policy "campaign_logs: read own" on campaign_logs for select using (
+  campaign_id in (select id from campaigns where user_id = auth.uid())
+);
+create policy "campaign_logs: insert own" on campaign_logs for insert with check (
+  campaign_id in (select id from campaigns where user_id = auth.uid())
+);
 
 -- ============================================================
 -- INDEXES

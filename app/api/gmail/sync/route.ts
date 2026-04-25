@@ -109,12 +109,18 @@ export async function POST(request: Request) {
         const messagesCtx = [{ sender: 'customer', content: `Subject: ${subject}\n\n${firstContent}` }]
         const aiClassification = await generateAIResponse(messagesCtx, settings)
 
+        // Extract customer email from fromHeader of first message
+        const fromHeader = gMessages[0].payload?.headers?.find((h) => h.name?.toLowerCase() === 'from')?.value || ''
+        const emailMatch = fromHeader.match(/<([^>]+)>/)
+        const customerEmail = emailMatch ? emailMatch[1] : fromHeader.replace(/"/g, '').trim()
+
         const { data: newConv, error: convError } = await supabase
           .from('conversations')
           .insert({
             user_id: user.id,
             title: subject,
             external_thread_id: thread.id,
+            customer_email: customerEmail,
             source: 'gmail',
             lead_status: aiClassification.lead_score,
             intent: aiClassification.intent,
