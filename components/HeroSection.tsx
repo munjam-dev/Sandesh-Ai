@@ -34,9 +34,6 @@ export default function HeroSection() {
       {/* Animated gradient background shift */}
       <div className="absolute top-0 left-0 right-0 h-full w-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#0066FF]/10 via-[#000000] to-[#000000] -z-20 opacity-60" />
 
-      {/* Animated gradient background shift */}
-      <div className="absolute top-0 left-0 right-0 h-full w-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#0066FF]/10 via-[#000000] to-[#000000] -z-20 opacity-60" />
-
       <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10 py-20">
         
         {/* Left Content (Text) */}
