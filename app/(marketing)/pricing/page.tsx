@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import Link from 'next/link'
+import CheckoutButton from '@/components/CheckoutButton'
 
 export default function PricingPage() {
   return (
@@ -36,6 +37,9 @@ export default function PricingPage() {
             <li className="flex gap-2"><Check size={18} className="text-[#00D4FF]" /> Basic AI responses</li>
             <li className="flex gap-2"><Check size={18} className="text-[#00D4FF]" /> Ideal for testing and small usage</li>
           </ul>
+          <Link href="/signup" className="w-full py-3 rounded-xl font-bold flex items-center justify-center bg-white/10 hover:bg-white/20 transition-all text-white mt-auto">
+            Get Free Plan
+          </Link>
         </motion.div>
 
         {/* Starter Plan */}
@@ -49,6 +53,11 @@ export default function PricingPage() {
             <li className="flex gap-2"><Check size={18} className="text-[#0066FF]" /> Lead tagging and prioritization</li>
             <li className="flex gap-2"><Check size={18} className="text-[#0066FF]" /> Best for small businesses</li>
           </ul>
+          <CheckoutButton 
+            plan="starter" 
+            priceText="Starter" 
+            className="bg-[#0066FF] hover:bg-[#0052cc] text-white mt-auto shadow-[0_0_20px_rgba(0,102,255,0.4)] hover:shadow-[0_0_30px_rgba(0,102,255,0.6)]" 
+          />
         </motion.div>
 
         {/* Growth Plan */}
@@ -61,6 +70,11 @@ export default function PricingPage() {
             <li className="flex gap-2"><Check size={18} className="text-[#00D4FF]" /> Advanced AI features</li>
             <li className="flex gap-2"><Check size={18} className="text-[#00D4FF]" /> Best for scaling teams</li>
           </ul>
+          <CheckoutButton 
+            plan="growth" 
+            priceText="Growth" 
+            className="bg-gradient-to-r from-[#0066FF] to-[#00D4FF] hover:scale-105 text-white mt-auto" 
+          />
         </motion.div>
 
         {/* Pro Plan */}
@@ -73,6 +87,9 @@ export default function PricingPage() {
             <li className="flex gap-2"><Check size={18} className="text-[#00D4FF]" /> Automation workflows</li>
             <li className="flex gap-2"><Check size={18} className="text-[#00D4FF]" /> Priority support</li>
           </ul>
+          <Link href="/contact" className="w-full py-3 rounded-xl font-bold flex items-center justify-center bg-white text-black hover:bg-gray-200 transition-all mt-auto">
+            Contact Sales
+          </Link>
         </motion.div>
       </div>
 

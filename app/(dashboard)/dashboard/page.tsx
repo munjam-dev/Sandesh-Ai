@@ -22,15 +22,17 @@ export default async function DashboardPage() {
   let totalMessages = 0
   let recentConversations: Array<{ id: string; title: string | null; created_at: string; lead_status: string | null }> = []
 
-  const [convRes, msgRes, recentRes] = await Promise.all([
-    supabase.from('conversations').select('id', { count: 'exact', head: true }).eq('user_id', user!.id),
-    supabase.from('messages').select('id', { count: 'exact', head: true }).in('conversation_id', (
-      supabase.from('conversations').select('id').eq('user_id', user!.id)
-    ) as any), // simplified for now
+  const { data: userConvs } = await supabase.from('conversations').select('id').eq('user_id', user!.id)
+  const convIds = userConvs?.map(c => c.id) || []
+
+  const [msgRes, recentRes] = await Promise.all([
+    convIds.length > 0 
+      ? supabase.from('messages').select('id', { count: 'exact', head: true }).in('conversation_id', convIds)
+      : Promise.resolve({ count: 0 }),
     supabase.from('conversations').select('id, title, created_at, lead_status').eq('user_id', user!.id).order('created_at', { ascending: false }).limit(5),
   ])
 
-  totalConversations = convRes.count ?? 0
+  totalConversations = convIds.length
   // Note: nested subqueries in count are tricky via JS client, so we might get 0 for messages if not structured perfectly. For UI demo purposes this is fine.
   
   recentConversations = recentRes.data ?? []
