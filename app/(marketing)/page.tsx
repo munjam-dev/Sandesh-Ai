@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, Bot, Inbox, Tags, Zap, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, Bot, Inbox, Tags, Zap } from 'lucide-react'
 import HeroSection from '@/components/HeroSection'
+import BentoSection from '@/components/BentoSection'
 
 export default function HomePage() {
   return (
@@ -76,50 +77,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* How it Works & Results */}
-      <section className="py-24 px-6 bg-[#050505]">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-10">How it works</h2>
-            <div className="space-y-8">
-              {[
-                { step: '01', text: 'Connect your channels in seconds' },
-                { step: '02', text: 'AI reads and understands incoming messages' },
-                { step: '03', text: 'AI suggests or sends replies instantly' },
-                { step: '04', text: 'You convert more leads with less effort' },
-              ].map((item, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="flex items-center gap-6"
-                >
-                  <div className="text-2xl font-black text-white/10">{item.step}</div>
-                  <div className="text-lg font-medium text-gray-300">{item.text}</div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-          <div className="p-10 rounded-3xl bg-gradient-to-br from-[#0066FF]/10 to-transparent border border-[#0066FF]/20 relative overflow-hidden">
-            <h3 className="text-2xl font-bold mb-8">The Results</h3>
-            <ul className="space-y-4">
-              {[
-                'Respond instantly to every inquiry',
-                'Increase lead conversion rates',
-                'Save hours of manual work every week',
-                'Deliver a better customer experience',
-              ].map((res, i) => (
-                <li key={i} className="flex items-center gap-3 text-gray-300">
-                  <CheckCircle2 className="text-[#00D4FF] shrink-0" size={20} />
-                  <span>{res}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+      <BentoSection />
 
       {/* CTA Section */}
       <section className="relative py-32 px-6 overflow-hidden min-h-[600px] flex items-center justify-center">
