@@ -50,10 +50,9 @@ const TESTIMONIALS = [
 
 export default function Testimonials() {
   return (
-    <section className="py-24 px-6 bg-[#050505] relative overflow-hidden">
-      {/* Background Gradients */}
-      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-[#0066FF]/10 rounded-full blur-[150px] pointer-events-none -z-10" />
-      <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-[#00D4FF]/10 rounded-full blur-[150px] pointer-events-none -z-10" />
+    <section className="py-32 px-6 bg-[#050505] relative overflow-hidden">
+      {/* Subtle Background Gradients */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[150px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 max-w-3xl mx-auto">
@@ -75,9 +74,9 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-white"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tighter text-white"
           >
-            Respond <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-[#00D4FF]">5x faster</span> with AI
+            Respond 5x faster.
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -99,10 +98,10 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="break-inside-avoid rounded-3xl bg-white/[0.02] border border-white/5 p-8 backdrop-blur-md hover:bg-white/[0.04] hover:border-white/10 transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(0,102,255,0.1)] relative"
+              className="break-inside-avoid rounded-3xl bg-[#111] border border-white/5 p-8 hover:bg-[#151515] hover:border-white/10 transition-all duration-300 group hover:-translate-y-1 relative shadow-[0_0_20px_rgba(0,0,0,0.5)]"
             >
-              {/* Subtle top gradient glow on hover */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-[#00D4FF]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Subtle top border glow on hover */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               {/* Stars */}
               <div className="flex gap-1 text-yellow-400 mb-6">

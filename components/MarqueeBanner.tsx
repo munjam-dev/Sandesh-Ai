@@ -23,11 +23,11 @@ export default function MarqueeBanner() {
           <div key={i} className="flex items-center">
             {PHRASES.map((phrase, j) => (
               <div key={j} className="flex items-center mx-8 md:mx-16">
-                <span className="text-4xl md:text-6xl font-black bg-gradient-to-r from-[#0066FF] to-[#00D4FF] bg-clip-text text-transparent uppercase tracking-tighter drop-shadow-[0_0_20px_rgba(0,102,255,0.3)] transition-all hover:drop-shadow-[0_0_30px_rgba(0,212,255,0.6)]">
+                <span className="text-4xl md:text-6xl font-bold text-white/40 uppercase tracking-tighter transition-all hover:text-white/80">
                   {phrase}
                 </span>
                 {/* Separator Dot */}
-                <span className="w-4 h-4 ml-16 md:ml-32 rounded-full bg-gradient-to-r from-[#0066FF] to-[#00D4FF] opacity-30 shadow-[0_0_10px_rgba(0,212,255,0.5)]" />
+                <span className="w-4 h-4 ml-16 md:ml-32 rounded-full bg-white/10" />
               </div>
             ))}
           </div>

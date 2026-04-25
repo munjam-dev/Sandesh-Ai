@@ -36,14 +36,16 @@ export default function Header() {
   return (
     <>
       <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-[#050505]/80 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] py-3' : 'bg-transparent py-5'
-        }`}
+        initial={{ opacity: 0, y: -20, x: '-50%' }}
+        animate={{ opacity: 1, y: 0, x: '-50%' }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-6 left-1/2 z-50 w-full max-w-5xl px-4 transition-all duration-500`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className={`flex items-center justify-between mx-auto transition-all duration-500 ${
+          scrolled 
+            ? 'bg-[#111111]/80 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-3 px-6 rounded-full' 
+            : 'bg-transparent py-4 px-2'
+        }`}>
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             {/* Light Mode Logo */}
@@ -61,22 +63,22 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6 bg-white/5 border border-white/10 px-6 py-2 rounded-full backdrop-blur-xl">
+          <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`relative px-2 py-1 text-sm font-medium rounded-full transition-colors ${
-                    isActive ? 'text-white' : 'text-gray-400 hover:text-white'
+                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
+                    isActive ? 'text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
                       className="absolute inset-0 bg-white/10 rounded-full -z-10"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
                   {link.name}
@@ -86,15 +88,12 @@ export default function Header() {
           </nav>
 
           {/* Right Nav (Auth) */}
-          <div className="hidden md:flex items-center gap-4">
-            <Link href="/login" className="text-sm font-medium text-gray-400 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all">
-              Login
+          <div className="hidden md:flex items-center gap-3">
+            <Link href="/login" className="text-sm font-medium text-gray-300 hover:text-white px-4 py-2 rounded-full transition-colors hover:bg-white/5">
+              Log in
             </Link>
-            <Link href="/signup" className="relative group overflow-hidden rounded-full p-[1px]">
-              <span className="absolute inset-0 bg-gradient-to-r from-[#0066FF] to-[#00D4FF] rounded-full opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="relative bg-black/80 px-5 py-2 rounded-full backdrop-blur-sm transition-all group-hover:bg-transparent">
-                <span className="text-sm font-medium text-white group-hover:text-white">Get Started</span>
-              </div>
+            <Link href="/signup" className="text-sm font-semibold text-black bg-white hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-300 px-5 py-2.5 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+              Sign up
             </Link>
           </div>
 

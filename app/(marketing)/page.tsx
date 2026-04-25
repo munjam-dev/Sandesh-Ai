@@ -20,7 +20,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-gray-300 text-xs font-semibold tracking-wide uppercase mb-6"
           >
             The Problem
           </motion.div>
@@ -44,7 +44,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00D4FF]/10 border border-[#00D4FF]/20 text-[#00D4FF] text-sm font-medium mb-6"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-gray-300 text-xs font-semibold tracking-wide uppercase mb-6"
             >
               The Solution
             </motion.div>
@@ -67,9 +67,9 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors"
+                className="p-8 rounded-[32px] bg-[#111] border border-white/5 hover:bg-[#151515] hover:border-white/10 transition-colors"
               >
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0066FF]/20 to-[#00D4FF]/20 border border-[#0066FF]/30 flex items-center justify-center text-[#00D4FF] mb-6">
+                <div className="w-12 h-12 rounded-[18px] bg-white/[0.05] border border-white/10 flex items-center justify-center text-white mb-6">
                   {feat.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-3">{feat.title}</h3>
@@ -96,19 +96,16 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="bg-[#050505]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-10 md:p-16 shadow-[0_0_50px_rgba(0,102,255,0.2)]"
           >
-            <h2 className="text-4xl md:text-5xl font-black mb-6">Your next customer is already reaching out</h2>
-            <p className="text-lg text-gray-300 mb-4 max-w-2xl mx-auto">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-6">Ready to scale?</h2>
+            <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
               Every second matters. While you're reading this, someone is messaging your business. Respond instantly and convert faster with AI.
-            </p>
-            <p className="text-sm font-semibold text-[#00D4FF] uppercase tracking-widest mb-10">
-              Operate globally. Respond instantly. Convert consistently.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-              <Link href="/signup" className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#0066FF] to-[#00D4FF] text-white rounded-full font-semibold hover:scale-105 transition-transform flex items-center justify-center gap-2">
-                Start Free Trial <ArrowRight size={18} />
+              <Link href="/signup" className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-semibold hover:scale-105 transition-transform flex items-center justify-center gap-2">
+                Start for free <ArrowRight size={18} />
               </Link>
-              <Link href="/demo" className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 text-white rounded-full font-semibold transition-all">
+              <Link href="/demo" className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 hover:bg-white/5 text-white rounded-full font-semibold transition-all">
                 View Demo
               </Link>
             </div>
