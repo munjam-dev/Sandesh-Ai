@@ -91,22 +91,15 @@ export default function Sidebar({ user, dbUser }: SidebarProps) {
     <aside className="sidebar">
       {/* Logo */}
       <div className="sidebar-logo">
-        <div className="sidebar-logo-icon">
-          <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
-            <path d="M6 10h24M6 18h16M6 26h20" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-            <circle cx="29" cy="26" r="6" fill="url(#sb-accent)"/>
-            <path d="M27 26l1.5 1.5 3-3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <defs>
-              <linearGradient id="sb-accent" x1="23" y1="20" x2="35" y2="32">
-                <stop stopColor="#06b6d4"/><stop offset="1" stopColor="#7c3aed"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div>
-          <div className="sidebar-logo-name">Sandesh AI</div>
-          <div className="sidebar-workspace">{dbUser?.business_name ?? 'My Workspace'}</div>
-        </div>
+        <Link href="/" className="flex items-center gap-3 w-full group">
+          <div className="p-1 rounded-xl bg-gradient-to-br from-[#0066FF]/20 to-[#00D4FF]/20 shadow-[0_0_15px_rgba(0,212,255,0.15)] transition-all group-hover:shadow-[0_0_25px_rgba(0,212,255,0.3)] flex-shrink-0">
+            <img src="/logo-icon.png" alt="Icon" className="w-8 h-8 group-hover:scale-105 transition-transform drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]" />
+          </div>
+          <div className="flex flex-col overflow-hidden">
+            <div className="sidebar-logo-name">Sandesh AI</div>
+            <div className="sidebar-workspace">{dbUser?.business_name ?? 'My Workspace'}</div>
+          </div>
+        </Link>
       </div>
 
       {/* Navigation */}

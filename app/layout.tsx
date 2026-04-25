@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     description: 'AI-powered team inbox for modern teams',
     type: 'website',
   },
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({

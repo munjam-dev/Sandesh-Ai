@@ -9,6 +9,7 @@ import {
   Text,
   Button,
   Hr,
+  Img,
 } from '@react-email/components';
 import * as React from 'react';
 
@@ -30,7 +31,12 @@ export const BrandedTemplate = ({
       <Body style={main}>
         <Container style={container}>
           <Section style={header}>
-            <Text style={logoText}>{businessName}</Text>
+            <Img 
+              src="https://sandesh-ai.vercel.app/logo-white.png" 
+              width="120" 
+              alt={businessName} 
+              style={{ margin: '0 auto', display: 'block' }} 
+            />
           </Section>
           
           <Section style={contentSection}>

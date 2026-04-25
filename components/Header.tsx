@@ -46,15 +46,18 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0066FF] to-[#00D4FF] flex items-center justify-center group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,212,255,0.4)]">
-              <svg width="18" height="18" viewBox="0 0 36 36" fill="none">
-                <path d="M6 10h24M6 18h16M6 26h20" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-                <circle cx="29" cy="26" r="6" fill="#fff"/>
-              </svg>
-            </div>
-            <span className="font-bold text-lg tracking-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent group-hover:from-white group-hover:to-white transition-all">
-              Sandesh AI
-            </span>
+            {/* Light Mode Logo */}
+            <img 
+              src="/logo.png" 
+              alt="Sandesh AI" 
+              className="h-6 md:h-10 dark:hidden group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" 
+            />
+            {/* Dark Mode Logo */}
+            <img 
+              src="/logo-white.png" 
+              alt="Sandesh AI" 
+              className="h-6 md:h-10 hidden dark:block group-hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_12px_rgba(0,212,255,0.4)]" 
+            />
           </Link>
 
           {/* Desktop Nav */}
