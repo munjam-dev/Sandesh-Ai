@@ -34,10 +34,10 @@ export default function HeroSection() {
       {/* Animated gradient background shift */}
       <div className="absolute top-0 left-0 right-0 h-full w-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#0066FF]/10 via-[#000000] to-[#000000] -z-20 opacity-60" />
 
-      {/* 3D Background */}
-      <Hero3D />
+      {/* Animated gradient background shift */}
+      <div className="absolute top-0 left-0 right-0 h-full w-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#0066FF]/10 via-[#000000] to-[#000000] -z-20 opacity-60" />
 
-      <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10 py-20">
         
         {/* Left Content (Text) */}
         <motion.div 
@@ -58,7 +58,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black tracking-tighter mb-6 leading-[1.1]"
+            className="text-5xl font-semibold leading-tight tracking-tighter mb-6"
           >
             Turn every message into a <br className="hidden md:block" />
             <span className="bg-gradient-to-r from-[#0066FF] to-[#00D4FF] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,102,255,0.4)]">
@@ -70,7 +70,7 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-lg md:text-xl text-gray-400 mb-10 max-w-xl leading-relaxed"
+            className="text-lg text-white/70 mb-10 max-w-xl leading-relaxed"
           >
             AI-powered replies across WhatsApp, Email, and Instagram. Respond instantly and never lose a lead again.
           </motion.p>
@@ -107,49 +107,14 @@ export default function HeroSection() {
           </motion.p>
         </motion.div>
 
-        {/* Right Content (Floating Mini Chat UI) */}
+        {/* Right Content (3D Animation) */}
         <motion.div 
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="hidden lg:flex justify-end relative"
+          className="hidden md:flex justify-center items-center relative"
         >
-          {/* Glassmorphic Chat Card */}
-          <div className="w-[380px] bg-[#050505]/40 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 shadow-[0_20px_60px_-15px_rgba(0,102,255,0.3)] relative overflow-hidden transform hover:-translate-y-2 transition-transform duration-500">
-            {/* Glossy top highlight */}
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-            
-            <div className="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-bold">
-                J
-              </div>
-              <div>
-                <div className="text-sm font-bold text-white">John Doe</div>
-                <div className="text-xs text-gray-400">via WhatsApp</div>
-              </div>
-              <div className="ml-auto text-xs text-gray-500">Just now</div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="bg-white/5 border border-white/5 rounded-2xl rounded-tl-sm p-4 w-[85%]">
-                <p className="text-sm text-gray-300">Hey, I'm looking to upgrade my team to the Enterprise plan. What's the pricing?</p>
-              </div>
-
-              <div className="bg-gradient-to-br from-[#0066FF]/20 to-[#00D4FF]/10 border border-[#0066FF]/30 rounded-2xl rounded-tr-sm p-4 w-[85%] ml-auto relative">
-                <div className="flex items-center gap-2 mb-2">
-                  <Bot size={14} className="text-[#00D4FF]" />
-                  <span className="text-[10px] font-bold text-[#00D4FF] uppercase tracking-wider">AI Generated</span>
-                </div>
-                
-                {/* Typing Animation */}
-                <div className="text-sm text-gray-200">
-                  <span className="inline-block overflow-hidden whitespace-nowrap border-r-2 border-[#00D4FF] animate-typing">
-                    Hi John! I'd be happy to share our Enterprise pricing with you. Let me generate a custom quote...
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Hero3D />
         </motion.div>
       </div>
 

@@ -58,14 +58,14 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1 bg-white/5 border border-white/10 px-2 py-1.5 rounded-full backdrop-blur-md">
+          <nav className="hidden md:flex items-center gap-6 bg-white/5 border border-white/10 px-6 py-2 rounded-full backdrop-blur-xl">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+                  className={`relative px-2 py-1 text-sm font-medium rounded-full transition-colors ${
                     isActive ? 'text-white' : 'text-gray-400 hover:text-white'
                   }`}
                 >

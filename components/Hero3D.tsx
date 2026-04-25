@@ -127,9 +127,8 @@ function ParticleSystem() {
 
 export default function Hero3D() {
   return (
-    <div className="absolute inset-0 -z-10 w-full h-full pointer-events-none">
+    <div className="w-[400px] h-[300px] pointer-events-none relative flex justify-center items-center">
       <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-        <color attach="background" args={['#000000']} />
         
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={2} color="#00D4FF" />
