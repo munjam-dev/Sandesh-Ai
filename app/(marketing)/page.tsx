@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, Bot, Inbox, Tags, Zap, CheckCircle2 } from 'lucide-react'
-import CtaGlobe from '@/components/CtaGlobe'
 import HeroSection from '@/components/HeroSection'
 
 export default function HomePage() {
@@ -122,10 +121,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section with 3D Globe */}
+      {/* CTA Section */}
       <section className="relative py-32 px-6 overflow-hidden min-h-[600px] flex items-center justify-center">
-        {/* The 3D Globe Component */}
-        <CtaGlobe />
+        {/* Glow Background instead of 3D Canvas */}
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#0066FF]/20 via-[#050505] to-[#050505] opacity-50" />
         
         <div className="max-w-4xl mx-auto text-center relative z-10 pt-20">
           <motion.div

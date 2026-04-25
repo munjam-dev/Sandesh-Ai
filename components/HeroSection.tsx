@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, Bot, Sparkles } from 'lucide-react'
-import Hero3D from './Hero3D'
+import HeroVisual from './HeroVisual'
 
 export default function HeroSection() {
   const { scrollY } = useScroll()
@@ -107,14 +107,14 @@ export default function HeroSection() {
           </motion.p>
         </motion.div>
 
-        {/* Right Content (3D Animation) */}
+        {/* Right Content (Visual Animation) */}
         <motion.div 
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="hidden md:flex justify-center items-center relative"
         >
-          <Hero3D />
+          <HeroVisual />
         </motion.div>
       </div>
 
