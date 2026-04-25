@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { PLAN_LIMITS } from '@/lib/types/database'
-import type { MessageRow, Sender } from '@/lib/types/database'
+import type { MessageRow, Sender, Plan } from '@/lib/types/database'
 
 // ----------------------------------------------------------------
 // GET /api/messages?conversation_id=<uuid>
@@ -123,7 +123,7 @@ export async function POST(request: Request) {
       .single()
 
     if (userData) {
-      const limit = PLAN_LIMITS[userData.plan]
+      const limit = PLAN_LIMITS[userData.plan as Plan]
       if (limit !== null && userData.replies_used >= limit) {
         return NextResponse.json(
           {
@@ -194,11 +194,10 @@ export async function POST(request: Request) {
         })
 
         if (!waResponse.ok) {
-          const errData = await waResponse.json()
-          console.error('Failed to send WhatsApp message:', errData)
+          // Ignore errors
         }
       } catch (err) {
-        console.error('Error contacting WhatsApp API:', err)
+        // Ignore errors
       }
     }
   }

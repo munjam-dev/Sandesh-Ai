@@ -2,15 +2,19 @@
 
 import { useState, useEffect, useRef } from 'react'
 
-interface Conversation {
-  id: string
-  subject: string | null
-  created_at: string
-  lead_status: string | null
-  intent: string | null
-  source: 'gmail' | 'whatsapp' | 'instagram'
-  external_thread_id: string | null
-}
+type Conversation = {
+  id: string;
+  title?: string;
+  name?: string;
+  email?: string;
+  platform?: "gmail" | "whatsapp" | "instagram";
+  subject?: string | null;
+  created_at: string;
+  lead_status?: string | null;
+  intent?: string | null;
+  source?: 'gmail' | 'whatsapp' | 'instagram';
+  external_thread_id?: string | null;
+};
 
 interface Message {
   id: string
@@ -263,7 +267,7 @@ export default function InboxPage() {
                 onClick={() => setSelectedId(conv.id)}
               >
                 <div className="conv-row-avatar">
-                  {(conv.title || 'U')[0]?.toUpperCase()}
+                  {(conv.title || conv.name || conv.email || 'U')[0]?.toUpperCase()}
                 </div>
                 <div className="conv-row-body">
                   <div className="conv-row-subject">

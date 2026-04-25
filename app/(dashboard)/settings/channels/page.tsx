@@ -45,6 +45,10 @@ export default function ChannelsPage() {
     }
   }
 
+  const handleConnectPlaceholder = (platform: string) => {
+    alert(`${platform} integration coming soon!`)
+  }
+
   if (loading) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '50vh' }}>

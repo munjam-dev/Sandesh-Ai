@@ -10,6 +10,7 @@ interface UserData {
   pricing_info: string | null
   tone: 'friendly' | 'professional' | 'sales'
   gmail_refresh_token: string | null
+  replies_used?: number
 }
 
 export default function SettingsPage() {

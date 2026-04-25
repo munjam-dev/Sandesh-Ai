@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
-
+export const runtime = 'nodejs'
 // 1. GET Request: Used by Meta to verify the webhook URL
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -13,7 +13,6 @@ export async function GET(request: Request) {
   const verifyToken = process.env.VERIFY_TOKEN
 
   if (mode === 'subscribe' && token === verifyToken) {
-    console.log('WhatsApp Webhook Verified!')
     // Must return the challenge exactly as plain text
     return new Response(challenge, { status: 200 })
   } else {
@@ -26,11 +25,6 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
 
-    // 7. Log incoming webhook payloads for debugging
-    console.log('--- WHATSAPP WEBHOOK PAYLOAD ---')
-    console.log(JSON.stringify(body, null, 2))
-    console.log('--------------------------------')
-
     // Ensure it's a WhatsApp API webhook
     if (body.object === 'whatsapp_business_account') {
       for (const entry of body.entry) {
@@ -42,10 +36,6 @@ export async function POST(request: Request) {
 
             const fromNumber = messageData.from
             const textContent = messageData.text?.body || '[Non-text message]'
-
-            console.log(`[INCOMING WHATSAPP MESSAGE]`)
-            console.log(`Sender Number: ${fromNumber}`)
-            console.log(`Message Text: ${textContent}`)
             
             const msgId = messageData.id
 
@@ -62,7 +52,6 @@ export async function POST(request: Request) {
               .single()
 
             if (!integrationData) {
-              console.error('No Sandesh AI user found for WhatsApp Phone ID:', phoneId)
               continue
             }
 
@@ -116,7 +105,6 @@ export async function POST(request: Request) {
     // Always return EVENT_RECEIVED to Meta
     return new Response('EVENT_RECEIVED', { status: 200 })
   } catch (error) {
-    console.error('Webhook Error:', error)
     return new Response('EVENT_RECEIVED', { status: 200 }) // Still return 200 to prevent retries
   }
 }
