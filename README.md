@@ -39,7 +39,7 @@ npm install
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open https://sandesh-oiyusttwp-arlo-technologies-projects.vercel.app/ in your browser.
 
 ## Webhooks (WhatsApp & Instagram)
 If you are developing locally, you must expose your local server to the internet using a tool like ngrok or localtunnel so Meta can deliver incoming messages.
