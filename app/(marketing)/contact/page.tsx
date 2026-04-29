@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Mail, Clock, ShieldCheck, Loader2, Send } from 'lucide-react'
-import CtaGlobe from '@/components/CtaGlobe'
+import HeroVisual from '@/components/HeroVisual'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
@@ -180,9 +180,7 @@ export default function ContactPage() {
 
             {/* Visual Element Container */}
             <div className="flex-1 relative min-h-[300px] md:min-h-[400px] rounded-3xl overflow-hidden border border-white/10 bg-[#050505]/40 flex items-center justify-center">
-              <div className="absolute inset-0 z-0">
-                <CtaGlobe />
-              </div>
+                <HeroVisual />
               
               {/* Optional overlay gradient for depth */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />

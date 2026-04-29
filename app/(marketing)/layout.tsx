@@ -7,7 +7,7 @@ export default function MarketingLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="relative min-h-screen bg-[#000] text-white selection:bg-[#0066FF] selection:text-white flex flex-col">
+    <div className="relative min-h-screen bg-black text-white selection:bg-[#0066FF] selection:text-white flex flex-col antialiased">
       <Header />
       <main className="flex-1">
         {children}

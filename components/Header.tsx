@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 const NAV_LINKS = [
-  { name: 'Home', href: '/' },
   { name: 'Features', href: '/features' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'FAQ', href: '/faq' },
@@ -19,135 +18,103 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
-  // Handle scroll to add background opacity
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsOpen(false)
-  }, [pathname])
+  useEffect(() => { setIsOpen(false) }, [pathname])
 
   return (
     <>
       <motion.header
-        initial={{ opacity: 0, y: -20, x: '-50%' }}
-        animate={{ opacity: 1, y: 0, x: '-50%' }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-6 left-1/2 z-50 w-full max-w-5xl px-4 transition-all duration-500`}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-6"
       >
-        <div className={`flex items-center justify-between mx-auto transition-all duration-500 ${
-          scrolled 
-            ? 'bg-[#111111]/80 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-3 px-6 rounded-full' 
-            : 'bg-transparent py-4 px-2'
+        <div className={`w-full max-w-7xl transition-all duration-500 rounded-full border border-white/5 ${
+          scrolled
+            ? 'bg-black/60 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] px-8 py-3'
+            : 'bg-transparent px-8 py-4'
         }`}>
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            {/* Light Mode Logo */}
-            <img 
-              src="/logo.png" 
-              alt="Sandesh AI" 
-              className="h-6 md:h-10 dark:hidden group-hover:scale-105 transition-transform duration-300 drop-shadow-sm" 
-            />
-            {/* Dark Mode Logo */}
-            <img 
-              src="/logo-white.png" 
-              alt="Sandesh AI" 
-              className="h-6 md:h-10 hidden dark:block group-hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_12px_rgba(0,212,255,0.4)]" 
-            />
-          </Link>
-
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
-            {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
-                    isActive ? 'text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNav"
-                      className="absolute inset-0 bg-white/10 rounded-full -z-10"
-                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                    />
-                  )}
-                  {link.name}
-                </Link>
-              )
-            })}
-          </nav>
-
-          {/* Right Nav (Auth) */}
-          <div className="hidden md:flex items-center gap-3">
-            <Link href="/login" className="text-sm font-medium text-gray-300 hover:text-white px-4 py-2 rounded-full transition-colors hover:bg-white/5">
-              Log in
+          <div className="flex items-center justify-between">
+            {/* Logo Left Aligned */}
+            <Link href="/" className="flex items-center flex-shrink-0">
+              <img
+                src="/logo-white.svg"
+                alt="Sandesh Ai"
+                className="h-7 w-auto hover:opacity-80 transition-opacity"
+              />
             </Link>
-            <Link href="/signup" className="text-sm font-semibold text-black bg-white hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-300 px-5 py-2.5 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-              Sign up
-            </Link>
-          </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </motion.header>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: '100vh' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className="fixed inset-0 top-0 z-40 bg-[#050505]/95 backdrop-blur-xl md:hidden pt-24 px-6 overflow-hidden flex flex-col"
-          >
-            <nav className="flex flex-col gap-6 items-center mt-10">
-              {NAV_LINKS.map((link, i) => (
-                <motion.div
-                  key={link.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 + 0.1 }}
-                >
+            {/* Nav Links Centered */}
+            <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+              {NAV_LINKS.map((link) => {
+                const isActive = pathname === link.href
+                return (
                   <Link
+                    key={link.name}
                     href={link.href}
-                    className={`text-2xl font-bold ${pathname === link.href ? 'text-white' : 'text-gray-400 hover:text-white'}`}
+                    className={`text-sm font-medium transition-colors ${
+                      isActive ? 'text-white' : 'text-white/60 hover:text-white'
+                    }`}
                   >
                     {link.name}
                   </Link>
-                </motion.div>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="flex flex-col items-center gap-4 mt-8 w-full border-t border-white/10 pt-8"
-              >
-                <Link href="/login" className="text-lg font-medium text-gray-300 hover:text-white w-full text-center py-3 rounded-xl hover:bg-white/5 transition-colors">
-                  Login
-                </Link>
-                <Link href="/signup" className="text-lg font-medium bg-gradient-to-r from-[#0066FF] to-[#00D4FF] text-white w-full text-center py-3 rounded-xl shadow-[0_0_20px_rgba(0,102,255,0.4)]">
-                  Get Started for Free
-                </Link>
-              </motion.div>
+                )
+              })}
             </nav>
+
+            {/* CTA Right Aligned */}
+            <div className="hidden md:flex items-center gap-4">
+              <Link
+                href="/login"
+                className="text-sm font-medium text-white/60 hover:text-white transition-colors"
+              >
+                Log in
+              </Link>
+              <Link
+                href="/signup"
+                className="text-sm font-semibold text-black bg-white hover:bg-white/90 px-6 py-2.5 rounded-full transition-all hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+              >
+                Get Started
+              </Link>
+            </div>
+
+            {/* Mobile Toggle */}
+            <button
+              className="md:hidden p-2 text-white/60 hover:text-white transition-colors"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </motion.header>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl md:hidden flex flex-col pt-32 px-8 gap-6"
+          >
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-3xl font-bold text-white/70 hover:text-white transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <div className="mt-8 pt-8 border-t border-white/10 flex flex-col gap-4">
+              <Link href="/login" className="text-xl font-medium text-white/60">Log in</Link>
+              <Link href="/signup" className="text-xl font-bold text-white bg-white/10 py-4 text-center rounded-2xl">Get Started Free</Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

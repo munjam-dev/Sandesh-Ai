@@ -565,3 +565,30 @@ input, textarea, select {
 .slide-in {
   animation: slideIn 0.3s ease forwards;
 }
+
+/* ============================
+   CUSTOM ANIMATIONS
+   ============================ */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Marketing page background */
+.marketing-bg {
+  background: #000;
+  color: #fff;
+}
