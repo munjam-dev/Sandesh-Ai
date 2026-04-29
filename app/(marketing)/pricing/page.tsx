@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Check, X, ChevronDown, Zap, ArrowRight, ShieldCheck } from 'lucide-react'
+import { Check, X, ChevronDown, Zap, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import CheckoutButton from '@/components/CheckoutButton'
 
@@ -103,72 +103,247 @@ export default function PricingPage() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32 items-end relative z-10">
-          
-          {/* Free Plan */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04] transition-all flex flex-col h-full group">
-            <h3 className="text-xl font-bold mb-2 text-gray-200">Free</h3>
-            <p className="text-sm text-gray-500 mb-6">Perfect for testing the waters.</p>
-            <div className="text-4xl font-black mb-8">$0<span className="text-base text-gray-500 font-normal">/mo</span></div>
-            <ul className="space-y-4 mb-8 flex-1 text-gray-300">
-              <li className="flex gap-3 items-start"><Check size={20} className="text-white mt-0.5 shrink-0" /> 100 AI replies</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-white mt-0.5 shrink-0" /> 1 channel</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-white mt-0.5 shrink-0" /> Basic inbox</li>
-              <li className="flex gap-3 items-start text-gray-600"><X size={20} className="mt-0.5 shrink-0" /> No automation</li>
-            </ul>
-            <Link href="/signup" className="w-full py-4 rounded-xl font-bold flex items-center justify-center bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-white group-hover:border-white/30">
-              Start Free
-            </Link>
-          </motion.div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-stretch relative z-10 mb-32">
+          {[
+            {
+              id: 'free',
+              name: 'Free',
+              desc: 'Perfect for testing the waters.',
+              price: '$0',
+              period: '/mo',
+              featured: false,
+              badge: null,
+              psychology: null,
+              features: [
+                { text: '100 AI replies', icon: 'check' },
+                { text: '1 channel', icon: 'check' },
+                { text: 'Basic inbox', icon: 'check' },
+                { text: 'No automation', icon: 'x' },
+              ],
+              cta: 'Start Free',
+              ctaHref: '/signup',
+              ctaType: 'link',
+            },
+            {
+              id: 'starter',
+              name: 'Starter',
+              desc: 'For small businesses starting to grow.',
+              price: '₹2,900',
+              period: '/mo',
+              featured: false,
+              badge: null,
+              psychology: null,
+              features: [
+                { text: '1000 AI replies', icon: 'check' },
+                { text: '2 channels', icon: 'check' },
+                { text: 'Lead tagging', icon: 'check' },
+                { text: 'Basic campaigns', icon: 'check' },
+              ],
+              cta: 'Get Starter',
+              ctaHref: null,
+              ctaType: 'checkout',
+              checkoutPlan: 'starter',
+            },
+            {
+              id: 'growth',
+              name: 'Growth',
+              desc: 'Convert more leads automatically.',
+              price: '₹9,900',
+              period: '/mo',
+              featured: true,
+              badge: 'Most Popular',
+              psychology: 'Unlock advanced automation',
+              features: [
+                { text: '5000 AI replies', icon: 'check' },
+                { text: 'All channels', icon: 'check' },
+                { text: 'AI campaigns', icon: 'check' },
+                { text: 'Automation workflows', icon: 'check', bold: true },
+                { text: 'Priority support', icon: 'check' },
+              ],
+              cta: 'Get Growth',
+              ctaHref: null,
+              ctaType: 'checkout',
+              checkoutPlan: 'growth',
+            },
+            {
+              id: 'pro',
+              name: 'Pro',
+              desc: 'For large teams and enterprises.',
+              price: 'Custom',
+              period: '',
+              featured: false,
+              badge: 'Best Value',
+              psychology: null,
+              features: [
+                { text: '15000+ AI replies', icon: 'check' },
+                { text: 'Advanced automation', icon: 'check' },
+                { text: 'Multi-step campaigns', icon: 'check' },
+                { text: 'Analytics dashboard', icon: 'check' },
+                { text: 'Team collaboration', icon: 'check' },
+              ],
+              cta: 'Go Pro',
+              ctaHref: '/contact',
+              ctaType: 'link',
+            },
+          ].map((plan, index) => (
+            <motion.div
+              key={plan.id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + index * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className={`relative ${plan.featured ? 'md:scale-[1.03] md:-translate-y-3 z-10' : ''}`}
+            >
+              {/* Gradient border wrapper for featured */}
+              {plan.featured && (
+                <>
+                  <div className="absolute -inset-[1px] rounded-3xl bg-gradient-to-b from-blue-500/50 via-cyan-400/30 to-blue-600/20 blur-[1px]" />
+                  <div className="absolute -inset-[1px] rounded-3xl bg-gradient-to-b from-blue-500/60 via-cyan-400/40 to-transparent" />
+                  <div className="absolute -inset-[2px] rounded-3xl bg-gradient-to-r from-blue-500/20 via-cyan-400/20 to-blue-500/20 blur-md animate-pulse" />
+                </>
+              )}
 
-          {/* Starter Plan */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04] transition-all flex flex-col h-full group">
-            <h3 className="text-xl font-bold mb-2 text-[#0066FF]">Starter</h3>
-            <p className="text-sm text-gray-500 mb-6">For small businesses starting to grow.</p>
-            <div className="text-4xl font-black mb-8">₹2,900<span className="text-base text-gray-500 font-normal">/mo</span></div>
-            <ul className="space-y-4 mb-8 flex-1 text-gray-300">
-              <li className="flex gap-3 items-start"><Check size={20} className="text-[#0066FF] mt-0.5 shrink-0" /> 1000 AI replies</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-[#0066FF] mt-0.5 shrink-0" /> 2 channels</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-[#0066FF] mt-0.5 shrink-0" /> Lead tagging</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-[#0066FF] mt-0.5 shrink-0" /> Basic campaigns</li>
-            </ul>
-            <CheckoutButton plan="starter" priceText="Starter" className="w-full py-4 rounded-xl font-bold flex items-center justify-center bg-[#0066FF]/10 text-[#0066FF] border border-[#0066FF]/30 hover:bg-[#0066FF]/20 transition-all" />
-          </motion.div>
+              <motion.div
+                whileHover={{ y: plan.featured ? -6 : -4, scale: 1.01 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className={`relative flex flex-col h-full rounded-3xl border backdrop-blur-2xl overflow-hidden ${
+                  plan.featured
+                    ? 'bg-white/[0.08] border-transparent shadow-[0_0_60px_rgba(0,102,255,0.15)]'
+                    : 'bg-white/[0.03] border-white/10 hover:border-white/20 hover:bg-white/[0.05] shadow-none hover:shadow-[0_0_40px_rgba(0,102,255,0.08)]'
+                } transition-all duration-500`}
+              >
+                {/* Floating animation for featured */}
+                {plan.featured && (
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                    className="absolute inset-0 pointer-events-none"
+                  />
+                )}
 
-          {/* Growth Plan (Most Popular) */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="p-8 rounded-3xl bg-gradient-to-b from-[#0066FF]/20 to-[#00D4FF]/10 border border-[#00D4FF]/50 relative flex flex-col transform lg:-translate-y-4 shadow-[0_0_40px_rgba(0,212,255,0.15)] group h-full">
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#0066FF] to-[#00D4FF] text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg flex items-center gap-1">
-              <Zap size={14} /> Most Popular
-            </div>
-            <h3 className="text-xl font-bold mb-2 text-white">Growth</h3>
-            <p className="text-sm text-[#00D4FF] mb-6 font-medium">Convert more leads automatically.</p>
-            <div className="text-4xl font-black mb-8 text-white">₹9,900<span className="text-base text-gray-400 font-normal">/mo</span></div>
-            <ul className="space-y-4 mb-8 flex-1 text-gray-200">
-              <li className="flex gap-3 items-start"><Check size={20} className="text-[#00D4FF] mt-0.5 shrink-0" /> 5000 AI replies</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-[#00D4FF] mt-0.5 shrink-0" /> All channels</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-[#00D4FF] mt-0.5 shrink-0" /> AI campaigns</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-[#00D4FF] mt-0.5 shrink-0 font-bold" /> Automation workflows</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-[#00D4FF] mt-0.5 shrink-0" /> Priority support</li>
-            </ul>
-            <CheckoutButton plan="growth" priceText="Growth Plan" className="w-full py-4 rounded-xl font-bold flex items-center justify-center bg-gradient-to-r from-[#0066FF] to-[#00D4FF] text-white hover:shadow-[0_0_30px_rgba(0,212,255,0.4)] hover:scale-[1.02] transition-all" />
-          </motion.div>
+                {/* Noise texture */}
+                <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none"
+                  style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }}
+                />
 
-          {/* Pro Plan */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04] transition-all flex flex-col h-full group">
-            <h3 className="text-xl font-bold mb-2 text-gray-200">Pro</h3>
-            <p className="text-sm text-gray-500 mb-6">For large teams and enterprises.</p>
-            <div className="text-4xl font-black mb-8">Custom</div>
-            <ul className="space-y-4 mb-8 flex-1 text-gray-300">
-              <li className="flex gap-3 items-start"><Check size={20} className="text-white mt-0.5 shrink-0" /> 15000+ AI replies</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-white mt-0.5 shrink-0" /> Advanced automation</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-white mt-0.5 shrink-0" /> Multi-step campaigns</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-white mt-0.5 shrink-0" /> Analytics dashboard</li>
-              <li className="flex gap-3 items-start"><Check size={20} className="text-white mt-0.5 shrink-0" /> Team collaboration</li>
-            </ul>
-            <Link href="/contact" className="w-full py-4 rounded-xl font-bold flex items-center justify-center bg-white text-black hover:bg-gray-200 transition-all">
-              Go Pro
-            </Link>
-          </motion.div>
+                {/* Inner gradient glow */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${
+                  plan.featured
+                    ? 'from-blue-600/10 via-cyan-500/5 to-transparent'
+                    : 'from-white/[0.02] to-transparent'
+                }`} />
+
+                {/* Content */}
+                <div className="relative z-10 flex flex-col h-full p-8">
+                  {/* Badge */}
+                  {plan.badge && (
+                    <div className={`absolute -top-px left-1/2 -translate-x-1/2 ${plan.featured ? 'w-36' : 'w-28'}`}>
+                      <div className="absolute inset-0 bg-blue-500 blur-xl opacity-30" />
+                      <span className={`relative block w-full text-center text-white text-[10px] font-bold uppercase tracking-widest py-1.5 rounded-b-xl shadow-lg flex items-center justify-center gap-1 ${
+                        plan.featured
+                          ? 'bg-gradient-to-r from-blue-600 to-cyan-500'
+                          : 'bg-white/10 border border-white/10'
+                      }`}>
+                        {plan.featured && <Zap size={12} />}
+                        {plan.badge}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Card body */}
+                  <div className="flex flex-col h-full">
+                    {/* Header */}
+                    <div className="mb-6">
+                      <h3 className={`text-xl font-bold mb-2 ${plan.featured ? 'text-white' : 'text-gray-200'}`}>
+                        {plan.name}
+                      </h3>
+                      <p className="text-sm text-gray-500 leading-relaxed min-h-[40px]">
+                        {plan.desc}
+                      </p>
+                    </div>
+
+                    {/* Price */}
+                    <div className="flex items-baseline gap-2 mb-8">
+                      <span className={`text-4xl font-black tracking-tight ${plan.featured ? 'text-white' : 'text-white/90'}`}>
+                        {plan.price}
+                      </span>
+                      {plan.period && (
+                        <span className="text-gray-500 text-base font-normal">{plan.period}</span>
+                      )}
+                    </div>
+
+                    {/* Divider */}
+                    <div className={`w-full h-px mb-6 ${plan.featured ? 'bg-gradient-to-r from-transparent via-blue-500/30 to-transparent' : 'bg-white/5'}`} />
+
+                    {/* Features */}
+                    <div className="flex-1 space-y-3.5 mb-8">
+                      {plan.features.map((feature, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                          {feature.icon === 'check' ? (
+                            <div className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded-md flex items-center justify-center ${
+                              plan.featured
+                                ? 'bg-blue-500/10 border border-blue-500/30'
+                                : 'bg-white/5 border border-white/10'
+                            }`}>
+                              <Check size={12} className={plan.featured ? 'text-cyan-400' : 'text-blue-400'} />
+                            </div>
+                          ) : (
+                            <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-md flex items-center justify-center bg-white/5 border border-white/10">
+                              <X size={12} className="text-gray-600" />
+                            </div>
+                          )}
+                          <span className={`text-sm ${feature.icon === 'x' ? 'text-gray-600' : plan.featured ? 'text-gray-200' : 'text-gray-300'} ${(feature as any).bold === true ? 'font-bold' : ''}`}>
+                            {feature.text}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Bottom */}
+                    <div className="mt-auto">
+                      {plan.psychology && (
+                        <div className="flex items-center justify-center gap-1.5 mb-3">
+                          <Sparkles size={14} className="text-cyan-400" />
+                          <span className="text-xs text-cyan-400/80 font-medium">
+                            {plan.psychology}
+                          </span>
+                        </div>
+                      )}
+
+                      {plan.ctaType === 'link' ? (
+                        <Link
+                          href={plan.ctaHref || '/signup'}
+                          className={`group/btn w-full py-3 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all duration-300 ${
+                            plan.featured
+                              ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-[0_8px_30px_rgba(0,102,255,0.35)] hover:shadow-[0_12px_40px_rgba(0,212,255,0.45)] hover:scale-[1.03] hover:-translate-y-0.5 active:scale-[0.98]'
+                              : 'bg-white/5 hover:bg-white/10 text-white border border-white/20 hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:scale-[1.02] active:scale-[0.98]'
+                          }`}
+                        >
+                          {plan.cta}
+                          <ArrowRight size={16} className="transition-transform duration-300 group-hover/btn:translate-x-1" />
+                        </Link>
+                      ) : (
+                        <CheckoutButton
+                          plan={plan.checkoutPlan || 'starter'}
+                          priceText={plan.name}
+                          className={`group w-full py-3 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all duration-300 ${
+                            plan.featured
+                              ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-[0_8px_30px_rgba(0,102,255,0.35)] hover:shadow-[0_12px_40px_rgba(0,212,255,0.45)] hover:scale-[1.03] hover:-translate-y-0.5 active:scale-[0.98]'
+                              : 'bg-[#0066FF]/10 text-[#0066FF] border border-[#0066FF]/30 hover:bg-[#0066FF]/20 hover:scale-[1.02] active:scale-[0.98]'
+                          }`}
+                        />
+                      )}
+
+                      {plan.featured && (
+                        <p className="text-center text-[10px] text-white/30 mt-3 uppercase tracking-wider font-medium">
+                          Recommended by 500+ teams
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
         </div>
 
         {/* Feature Comparison */}
