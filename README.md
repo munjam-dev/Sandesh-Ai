@@ -39,7 +39,7 @@ npm install
 ```bash
 npm run dev
 ```
-Open https://sandesh-oiyusttwp-arlo-technologies-projects.vercel.app/ in your browser.
+Open h[ttps://sandesh-oiyusttwp-arlo-technologies-projects.vercel.app/ ](https://www.sandeshai.online/)in your browser.
 
 ## Webhooks (WhatsApp & Instagram)
 If you are developing locally, you must expose your local server to the internet using a tool like ngrok or localtunnel so Meta can deliver incoming messages.
