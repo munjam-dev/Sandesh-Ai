@@ -32,7 +32,7 @@ export const BrandedTemplate = ({
         <Container style={container}>
           <Section style={header}>
             <Img 
-              src="https://sandesh-ai.vercel.app/logo-white.png" 
+              src="https://www.sandeshai.online/logo-white.png" 
               width="120" 
               alt={businessName} 
               style={{ margin: '0 auto', display: 'block' }} 
@@ -49,7 +49,7 @@ export const BrandedTemplate = ({
             />
             
             <Section style={buttonContainer}>
-              <Button style={button} href="https://sandesh-ai.vercel.app">
+              <Button style={button} href="https://www.sandeshai.online/">
                 Take Action
               </Button>
             </Section>
